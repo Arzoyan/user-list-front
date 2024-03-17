@@ -6,7 +6,6 @@ import useFetch from "@/hooks/useFetch";
 import { useEffect } from "react";
 
 const UserCommentsList = ({ selectedUser, activeUser }) => {
-  // const [commentList, setCommentList] = useState(null);
   const {
     fetchData,
     data: commentList,
@@ -16,29 +15,9 @@ const UserCommentsList = ({ selectedUser, activeUser }) => {
   } = useFetch(`users/${selectedUser.id}?populate=company_id`, "GET");
 
   useEffect(() => {
-    // Fetch users when the component mounts
     fetchData();
   }, [selectedUser]);
 
-  // const getComments = async () => {
-  //   const userData = JSON.parse(localStorage.getItem("user"));
-  //   try {
-  //     const response = await fetch(
-  //       `http://localhost:1337/api/users/${selectedUser.id}?populate=company_id`,
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           Authorization: `Bearer ${userData.jwt}`,
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  //     const newList = await response.json();
-  //     setCommentList(newList.company_id.companyReviews);
-  //   } catch (error) {
-  //     console.error("Error fetching users:", error);
-  //   }
-  // };
   return (
     <div className="custom-scroll comment-container">
       <div className="comment-header">
@@ -69,7 +48,7 @@ const UserCommentsList = ({ selectedUser, activeUser }) => {
       <div className="comment-list">
         {loading || !commentList ? (
           <Loading />
-        ) : !commentList.company_id.companyReviews?.length ? (
+        ) : !commentList.company_id?.companyReviews?.length ? (
           <NoData />
         ) : (
           commentList.company_id.companyReviews.map((comment) => (

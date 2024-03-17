@@ -18,26 +18,6 @@ const UserList = ({ activeUser, selectedUser }) => {
     fetchData();
   }, []);
 
-  // const users = useMemo(() => data, [data]);
-
-  // const getUsers = async () => {
-  //   const userData = JSON.parse(localStorage.getItem("user"));
-  //   try {
-  //     const response = await fetch(`http://localhost:1337/api/users`, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${userData.jwt}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     const json = await response.json();
-
-  //     setUsers(json);
-  //   } catch (error) {
-  //     console.error("Error fetching users:", error);
-  //   }
-  // };
-
   return (
     <div className="custom-scroll user-list">
       {loading || !users ? (
@@ -45,43 +25,58 @@ const UserList = ({ activeUser, selectedUser }) => {
       ) : !users?.length ? (
         <NoData />
       ) : (
-        users.map((user) => (
-          <div
-            className="user-list-item-container"
-            key={user.id}
-            onClick={(e) => {
-              e.preventDefault();
-              activeUser(user);
-            }}
-          >
+        users.map((user) => {
+          console.log(
+            "%cuser-list-frontsrcComponentsUerListUserList.js:20 user",
+            "color: white; background-color: #26bfa5;",
+            user
+          );
+          return (
             <div
-              className={`user-item ${
-                user.id === selectedUser?.id ? " user-item-active" : ""
-              }`}
+              className={`${
+                !user.companyName ? "disabled" : ""
+              } user-list-item-container `}
+              key={user.id}
+              onClick={(e) => {
+                e.preventDefault();
+                if (user.companyName) {
+                  activeUser(user);
+                }
+              }}
             >
-              <div className="user-item-info">
-                <div className="user-image">
-                  <img priority="true" src={"/userImg.png"} alt={`user img`} />
+              <div
+                className={`user-item ${
+                  user.id === selectedUser?.id ? " user-item-active" : ""
+                }`}
+              >
+                <div className="user-item-info">
+                  <div className="user-image">
+                    <img
+                      priority="true"
+                      src={"/userImg.png"}
+                      alt={`user img`}
+                    />
+                  </div>
+                  <div className="user-details">
+                    <h2>
+                      {user.firstName ?? "firstName"}
+                      {user.lastName ?? "lastName"}
+                    </h2>
+                    <p>{user.email}</p>
+                  </div>
                 </div>
-                <div className="user-details">
-                  <h2>
-                    {user.firstName ?? "firstName"}
-                    {user.lastName ?? "lastName"}
-                  </h2>
-                  <p>{user.email}</p>
+                <div className="user-item-icon">
+                  <img
+                    className="location-icon"
+                    src="/arrow.svg"
+                    alt="location icon"
+                    priority
+                  />
                 </div>
-              </div>
-              <div className="user-item-icon">
-                <img
-                  className="location-icon"
-                  src="/arrow.svg"
-                  alt="location icon"
-                  priority
-                />
               </div>
             </div>
-          </div>
-        ))
+          );
+        })
       )}
 
       {error && (

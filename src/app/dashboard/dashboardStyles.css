@@ -144,7 +144,12 @@
 .user-list-item-container {
   margin-right: 10px;
 }
-
+.disabled .user-item {
+  cursor: not-allowed;
+}
+.disabled .user-item:hover {
+  border: 1px solid #ccc;
+}
 .user-item {
   display: flex;
   align-items: center;
