@@ -1,0 +1,37 @@
+.notification-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: 100%;
+}
+
+.notification-content {
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+.error {
+  background-color: #f44336;
+}
+
+.success {
+  background-color: #1de82e;
+}
+
+.message {
+  flex: 1;
+}
+
+.closeButton {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px;
+  font-size: 18px;
+}

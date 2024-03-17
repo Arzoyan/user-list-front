@@ -1,0 +1,17 @@
+.header {
+  background-color: #fff;
+  color: #fff;
+  padding: 24px 64px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+}
+
+.header .login-user {
+  cursor: pointer;
+}
